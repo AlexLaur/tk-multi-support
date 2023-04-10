@@ -9,13 +9,10 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 import sgtk
-import os
-import sys
-import threading
 
 # by importing QT from sgtk rather than directly, we ensure that
 # the code will be compatible with both PySide and PyQt.
-from sgtk.platform.qt import QtCore, QtGui
+from sgtk.platform.qt import QtGui
 from .ui.dialog import Ui_Dialog
 
 # standard toolkit logger
@@ -56,7 +53,7 @@ class AppDialog(QtGui.QWidget):
         self._app = sgtk.platform.current_bundle()
 
         # logging happens via a standard toolkit logger
-        logger.info("Launching Starter Application...")
+        logger.info("Launching Support Application")
 
         # via the self._app handle we can for example access:
         # - The engine, via self._app.engine
