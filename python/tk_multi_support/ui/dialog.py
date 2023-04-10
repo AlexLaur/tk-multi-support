@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'dialog.ui'
+# Form implementation generated from reading ui file '/s/apps/users/laurettea/packages/mikrosVfx/tk_multi_support/dev/tk-multi-support/resources/dialog.ui'
 #
-#      by: pyside-uic 0.2.15 running on PySide 1.2.2
+# Created: Mon Apr 10 21:21:48 2023
+#      by: pyside2-uic  running on PySide2 2.0.0~alpha0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -11,29 +12,35 @@ from tank.platform.qt import QtCore, QtGui
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(431, 392)
-        self.horizontalLayout = QtGui.QHBoxLayout(Dialog)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.logo_example = QtGui.QLabel(Dialog)
-        self.logo_example.setText("")
-        self.logo_example.setPixmap(QtGui.QPixmap(":/res/sg_logo.png"))
-        self.logo_example.setObjectName("logo_example")
-        self.horizontalLayout.addWidget(self.logo_example)
-        self.context = QtGui.QLabel(Dialog)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.context.sizePolicy().hasHeightForWidth())
-        self.context.setSizePolicy(sizePolicy)
-        self.context.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.context.setObjectName("context")
-        self.horizontalLayout.addWidget(self.context)
+        Dialog.resize(574, 392)
+        self.verticalLayout = QtGui.QVBoxLayout(Dialog)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.formLayout = QtGui.QFormLayout()
+        self.formLayout.setObjectName("formLayout")
+        self.lie_object = QtGui.QLineEdit(Dialog)
+        self.lie_object.setObjectName("lie_object")
+        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lie_object)
+        self.txe_content = QtGui.QTextEdit(Dialog)
+        self.txe_content.setObjectName("txe_content")
+        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.txe_content)
+        self.label = QtGui.QLabel(Dialog)
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
+        self.label_2 = QtGui.QLabel(Dialog)
+        self.label_2.setObjectName("label_2")
+        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_2)
+        self.verticalLayout.addLayout(self.formLayout)
+        self.pub_send = QtGui.QPushButton(Dialog)
+        self.pub_send.setObjectName("pub_send")
+        self.verticalLayout.addWidget(self.pub_send)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "The Current Sgtk Environment", None, QtGui.QApplication.UnicodeUTF8))
-        self.context.setText(QtGui.QApplication.translate("Dialog", "Your Current Context: ", None, QtGui.QApplication.UnicodeUTF8))
+        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Problem Reporting", None, -1))
+        self.label.setText(QtGui.QApplication.translate("Dialog", "Object", None, -1))
+        self.label_2.setText(QtGui.QApplication.translate("Dialog", "Message", None, -1))
+        self.pub_send.setText(QtGui.QApplication.translate("Dialog", "Send", None, -1))
 
 from . import resources_rc

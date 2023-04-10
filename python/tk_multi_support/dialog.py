@@ -29,7 +29,7 @@ def show_dialog(app_instance):
 
     # we pass the dialog class to this method and leave the actual construction
     # to be carried out by toolkit.
-    app_instance.engine.show_dialog("Starter Template App...", app_instance, AppDialog)
+    app_instance.engine.show_dialog("Report a problem...", app_instance, AppDialog)
 
 
 class AppDialog(QtGui.QWidget):
@@ -61,4 +61,4 @@ class AppDialog(QtGui.QWidget):
         # - An Sgtk API instance, via self._app.sgtk
 
         # lastly, set up our very basic UI
-        self.ui.context.setText("Current Context: %s" % self._app.context)
+        # self.ui.context.setText("Current Context: %s" % self._app.context)
