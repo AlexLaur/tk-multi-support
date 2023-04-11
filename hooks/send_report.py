@@ -26,17 +26,20 @@ class ReportSender(HookClass):
         :return: True if the report has been sent, False otherwise
         :rtype: bool
         """
-
         data = {
             "title": report.subject,
             "description": report.content,
-            "project": {"id": report.context.project.id, "type": "Project"}
+            "project": {"id": report.context.project.id, "type": "Project"},
+            "created_by": {"id": report.context.user.id, "type": "HumanUser"}
         }
+        sg_ticket = self.parent.shotgun.create("Ticket", data)
 
-        # TODO add attachements for thumbnails
-
-        print(data)
-
-        # self.parent.shotgun.create("Ticket", data)
+        for thumbnail in report.thumbnails:
+            self.parent.shotgun.upload(
+                entity_type="Ticket",
+                entity_id=sg_ticket.get("id"),
+                path=thumbnail,
+                field_name="attachments",
+            )
 
         return True
