@@ -44,7 +44,7 @@ class Thumbnail(QtGui.QLabel):
         self._bundle = sgtk.platform.current_bundle()
         self.setAutoFillBackground(True)
         self.setCursor(QtCore.Qt.PointingHandCursor)
-        self._no_thumb_pixmap = QtGui.QPixmap(":/tk_multi_publish2/camera.png")
+        self._no_thumb_pixmap = QtGui.QPixmap(":/tk_multi_support/camera.png")
         self._do_screengrab.connect(self._on_screengrab)
         self.set_thumbnail(self._no_thumb_pixmap)
 
