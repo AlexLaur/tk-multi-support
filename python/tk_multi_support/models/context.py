@@ -11,37 +11,72 @@
 from collections import namedtuple
 
 
-class Project(namedtuple("Project", ["id", "name", "url"], defaults=[0, None, None])):
+class BaseDataObject(object):
+    def __init__(self, id=0, name="", url=""):
+        self._id = id
+        self._name = name
+        self._url = url
+
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def url(self):
+        return self._url
+
     def __repr__(self):
-        return "Project: {} ({})".format(self.name, self.id)
+        return "{class_name}: {name} ({id})".format(
+            class_name=self.__class__.__name__, name=self.name, id=self.id
+        )
 
 
-class Entity(
-    namedtuple("Entity", ["id", "name", "type", "url"], defaults=[0, None, None, None])
-):
+class Project(BaseDataObject):
+    pass
+
+
+class Entity(BaseDataObject):
+    def __init__(self, id=0, name="", url="", type=None):
+        super(Entity, self).__init__(id, name, url)
+
+        self._type = type
+
+    @property
+    def type(self):
+        return self._type
+
     def __repr__(self):
-        return "{}: {} ({})".format(self.type, self.name, self.id)
+        return "{entity_type}: {name} ({id})".format(
+            entity_type=self.type, name=self.name, id=self.id
+        )
 
 
-class User(
-    namedtuple(
-        "User",
-        ["id", "name", "login", "email", "url"],
-        defaults=[0, None, None, None, None],
-    )
-):
-    def __repr__(self):
-        return "User: {} ({})".format(self.login, self.id)
+class User(BaseDataObject):
+    def __init__(self, id=0, name="", url="", login="", email=""):
+        super(User, self).__init__(id, name, url)
+
+        self._login = login
+        self._email = email
+
+    @property
+    def login(self):
+        return self._login
+
+    @property
+    def email(self):
+        return self._email
 
 
-class Task(namedtuple("Task", ["id", "name", "url"], defaults=[0, None, None])):
-    def __repr__(self):
-        return "Task: {} ({})".format(self.name, self.id)
+class Task(BaseDataObject):
+    pass
 
 
-class Step(namedtuple("Step", ["id", "name", "url"], defaults=[0, None, None])):
-    def __repr__(self):
-        return "Step: {} ({})".format(self.name, self.id)
+class Step(BaseDataObject):
+    pass
 
 
 class Context(

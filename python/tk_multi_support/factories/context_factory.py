@@ -16,7 +16,6 @@ from ..models import Context, Project, User, Task, Step, Entity
 
 
 class ContextFactory(object):
-
     @classmethod
     def build(cls, tk_ctx):
         """Build the context object
@@ -29,62 +28,11 @@ class ContextFactory(object):
         app = sgtk.platform.current_bundle()
         base_url = app.shotgun.base_url
 
-        url = cls.urljoin(base_url, "detail", "Project", tk_ctx.project.get("id"))
-        project = Project(tk_ctx.project.get("id"), tk_ctx.project.get("name"), url)
-
-        if tk_ctx.user:
-
-            url = cls.urljoin(base_url, "detail", "HumanUser", tk_ctx.user.get("id"))
-
-            if not tk_ctx.user.get("login", None) or not tk_ctx.user.get(
-                "email", None
-            ):
-                user_data = app.shotgun.find_one(
-                    "HumanUser",
-                    filters=[["id", "is", tk_ctx.user.get("id")]],
-                    fields=["id", "name", "login", "email"],
-                )
-
-                user = User(
-                    user_data.get("id"),
-                    user_data.get("name"),
-                    user_data.get("login"),
-                    user_data.get("email"),
-                    url,
-                )
-            else:
-                user = User(
-                    tk_ctx.user.get("id"),
-                    tk_ctx.user.get("name"),
-                    tk_ctx.user.get("login"),
-                    tk_ctx.user.get("email"),
-                    url,
-                )
-        else:
-            user = User()
-
-        if tk_ctx.task:
-            url = cls.urljoin(base_url, "detail", "Task", tk_ctx.task.get("id"))
-            task = Task(tk_ctx.task.get("id"), tk_ctx.task.get("name"), url)
-        else:
-            task = Task()
-
-        if tk_ctx.step:
-            url = cls.urljoin(base_url, "detail", "Step", tk_ctx.step.get("id"))
-            step = Step(tk_ctx.step.get("id"), tk_ctx.step.get("name"), url)
-        else:
-            step = Step()
-
-        if tk_ctx.entity:
-            url = cls.urljoin(base_url, "detail", tk_ctx.entity.get("type"), tk_ctx.step.get("id"))
-            entity = Entity(
-                tk_ctx.entity.get("id"),
-                tk_ctx.entity.get("name"),
-                tk_ctx.entity.get("type"),
-                url,
-            )
-        else:
-            entity = Entity()
+        project = cls._get_project_dto(tk_ctx.project, base_url)
+        user = cls._get_user_dto(tk_ctx.user, base_url)
+        task = cls._get_task_dto(tk_ctx.task, base_url)
+        step = cls._get_step_dto(tk_ctx.step, base_url)
+        entity = cls._get_entity_dto(tk_ctx.entity, base_url)
 
         context = Context(
             project=project, entity=entity, user=user, task=task, step=step
@@ -94,5 +42,69 @@ class ContextFactory(object):
 
     @staticmethod
     def urljoin(*parts):
-        return '/'.join(str(part).strip('/') for part in parts)
+        return "/".join(str(part).strip("/") for part in parts)
 
+    @classmethod
+    def _get_user_dto(cls, ctx_user, base_url):
+        if not ctx_user:
+            return User()
+
+        uid = ctx_user.get("id")
+        name = ctx_user.get("name")
+        login = ctx_user.get("login", None)
+        email = ctx_user.get("email", None)
+        url = cls.urljoin(base_url, "detail", "HumanUser", uid)
+
+        if not login or not email:
+            app = sgtk.platform.current_bundle()
+            user_data = app.shotgun.find_one(
+                "HumanUser",
+                filters=[["id", "is", uid]],
+                fields=["login", "email"],
+            )
+
+            login = user_data.get("login")
+            email = user_data.get("email")
+
+        return User(uid, name, url, login, email)
+
+    @classmethod
+    def _get_project_dto(cls, ctx_project, base_url):
+        uid = ctx_project.get("id")
+        name = ctx_project.get("name")
+        url = cls.urljoin(base_url, "detail", "Project", uid)
+        return Project(uid, name, url)
+
+    @classmethod
+    def _get_task_dto(cls, ctx_task, base_url):
+        if not ctx_task:
+            return Task()
+
+        uid = ctx_task.get("id")
+        name = ctx_task.get("name")
+        url = cls.urljoin(base_url, "detail", "Task", uid)
+
+        return Task(uid, name, url)
+
+    @classmethod
+    def _get_step_dto(cls, ctx_step, base_url):
+        if not ctx_step:
+            return Step()
+
+        uid = ctx_step.get("id")
+        name = ctx_step.get("name")
+        url = cls.urljoin(base_url, "detail", "Step", uid)
+
+        return Step(uid, name, url)
+
+    @classmethod
+    def _get_entity_dto(cls, ctx_entity, base_url):
+        if not ctx_entity:
+            return Entity()
+
+        uid = ctx_entity.get("id")
+        name = ctx_entity.get("name")
+        type = ctx_entity.get("type")
+        url = cls.urljoin(base_url, "detail", type, uid)
+
+        return Entity(uid, name, url, type)
