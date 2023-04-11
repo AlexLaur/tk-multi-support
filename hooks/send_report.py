@@ -17,7 +17,8 @@ HookClass = sgtk.get_hook_baseclass()
 class ReportSender(HookClass):
 
     CONTENT = (
-        "Content\n" "---\n"
+        "Content\n"
+        "---\n"
         "\n"
         "{content}\n"
         "Context\n"
@@ -50,11 +51,11 @@ class ReportSender(HookClass):
             task=report.context.task,
             step=report.context.step,
             entity=report.context.entity,
-            project_url = report.context.project.url,
-            user_url = report.context.user.url,
-            task_url = report.context.task.url,
-            step_url = report.context.step.url,
-            entity_url = report.context.entity.url,
+            project_url=report.context.project.url,
+            user_url=report.context.user.url,
+            task_url=report.context.task.url,
+            step_url=report.context.step.url,
+            entity_url=report.context.entity.url,
             dcc_name=report.scene_infos.dcc_name,
             dcc_version=report.scene_infos.dcc_version,
             scene_path=report.scene_infos.current_scene,
@@ -63,8 +64,8 @@ class ReportSender(HookClass):
         data = {
             "title": report.subject,
             "description": description,
-            "project": {"id": report.context.project.id, "type": "Project"},
-            "created_by": {"id": report.context.user.id, "type": "HumanUser"},
+            "project": {"id": report.context.project.uid, "type": "Project"},
+            "created_by": {"id": report.context.user.uid, "type": "HumanUser"},
         }
 
         sg_ticket = self.parent.shotgun.create("Ticket", data)

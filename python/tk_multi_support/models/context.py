@@ -12,14 +12,14 @@ from collections import namedtuple
 
 
 class BaseDataObject(object):
-    def __init__(self, id=0, name="", url=""):
-        self._id = id
+    def __init__(self, uid=0, name="", url=""):
+        self._uid = uid
         self._name = name
         self._url = url
 
     @property
-    def id(self):
-        return self._id
+    def uid(self):
+        return self._uid
 
     @property
     def name(self):
@@ -30,8 +30,8 @@ class BaseDataObject(object):
         return self._url
 
     def __repr__(self):
-        return "{class_name}: {name} ({id})".format(
-            class_name=self.__class__.__name__, name=self.name, id=self.id
+        return "{class_name}: {name} ({uid})".format(
+            class_name=self.__class__.__name__, name=self.name, uid=self.uid
         )
 
 
@@ -40,8 +40,8 @@ class Project(BaseDataObject):
 
 
 class Entity(BaseDataObject):
-    def __init__(self, id=0, name="", url="", type=None):
-        super(Entity, self).__init__(id, name, url)
+    def __init__(self, uid=0, name="", url="", type=None):
+        super(Entity, self).__init__(uid, name, url)
 
         self._type = type
 
@@ -50,14 +50,14 @@ class Entity(BaseDataObject):
         return self._type
 
     def __repr__(self):
-        return "{entity_type}: {name} ({id})".format(
-            entity_type=self.type, name=self.name, id=self.id
+        return "{entity_type}: {name} ({uid})".format(
+            entity_type=self.type, name=self.name, uid=self.uid
         )
 
 
 class User(BaseDataObject):
-    def __init__(self, id=0, name="", url="", login="", email=""):
-        super(User, self).__init__(id, name, url)
+    def __init__(self, uid=0, name="", url="", login="", email=""):
+        super(User, self).__init__(uid, name, url)
 
         self._login = login
         self._email = email
