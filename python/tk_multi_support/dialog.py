@@ -12,8 +12,9 @@ import sgtk
 
 # by importing QT from sgtk rather than directly, we ensure that
 # the code will be compatible with both PySide and PyQt.
-from sgtk.platform.qt import QtGui
+from sgtk.platform.qt import QtGui, QtCore
 from .ui.dialog import Ui_Dialog
+from .collector import DataCollector
 
 # standard toolkit logger
 logger = sgtk.platform.get_logger(__name__)
@@ -32,7 +33,7 @@ def show_dialog(app_instance):
     app_instance.engine.show_dialog("Report a problem...", app_instance, AppDialog)
 
 
-class AppDialog(QtGui.QWidget):
+class AppDialog(QtGui.QWidget, Ui_Dialog):
     """
     Main application dialog window
     """
@@ -42,11 +43,10 @@ class AppDialog(QtGui.QWidget):
         Constructor
         """
         # first, call the base class and let it do its thing.
-        QtGui.QWidget.__init__(self)
+        super(AppDialog, self).__init__()
 
         # now load in the UI that was created in the UI designer
-        self.ui = Ui_Dialog()
-        self.ui.setupUi(self)
+        self.setupUi(self)
 
         # most of the useful accessors are available through the Application class instance
         # it is often handy to keep a reference to this. You can get it via the following method:
@@ -55,10 +55,32 @@ class AppDialog(QtGui.QWidget):
         # logging happens via a standard toolkit logger
         logger.info("Launching Support Application")
 
-        # via the self._app handle we can for example access:
-        # - The engine, via self._app.engine
-        # - A Shotgun API instance, via self._app.shotgun
-        # - An Sgtk API instance, via self._app.sgtk
+        # Data collector
+        self._data_collector = DataCollector()
+        self._report = self._data_collector.collect()
 
-        # lastly, set up our very basic UI
-        # self.ui.context.setText("Current Context: %s" % self._app.context)
+        # Signals
+        self.pub_send.clicked.connect(self.on_send_report_requested)
+        self.item_thumbnail.screen_grabbed.connect(self.on_thumbnail_created)
+
+    @QtCore.Slot()
+    def on_send_report_requested(self):
+
+        self._report.subject = self.lie_subject.text()
+        self._report.content = self.txe_content.toPlainText()
+
+        self._app.execute_hook_method(
+            "hook_send_report",
+            "send",
+            report=self._report
+        )
+
+        self.close()
+
+    @QtCore.Slot(object)
+    def on_thumbnail_created(self, pixmap):
+        # from tempfile import gettempdir
+        # generate temp path and save the pixmap
+        # store the pixmap in the self._report.thunbnails
+        print(pixmap)
+

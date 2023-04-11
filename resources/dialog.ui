@@ -17,7 +17,7 @@
    <item>
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lie_object"/>
+      <widget class="QLineEdit" name="lie_subject"/>
      </item>
      <item row="1" column="1">
       <widget class="QTextEdit" name="txe_content"/>
@@ -36,6 +36,41 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Thumbnail</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="Thumbnail" name="item_thumbnail">
+       <property name="minimumSize">
+        <size>
+         <width>160</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>160</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Click to take a screenshot.</string>
+       </property>
+       <property name="accessibleName">
+        <string>item thumbnail</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -47,6 +82,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Thumbnail</class>
+   <extends>QLabel</extends>
+   <header>..thumbnail</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>
