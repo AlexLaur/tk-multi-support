@@ -17,7 +17,7 @@ HookClass = sgtk.get_hook_baseclass()
 class ReportSender(HookClass):
 
     CONTENT = (
-        "Content\n" "---\n",
+        "Content\n" "---\n"
         "\n"
         "{content}\n"
         "Context\n"
@@ -31,7 +31,7 @@ class ReportSender(HookClass):
         "DCC\n"
         "---\n"
         "- {dcc_name} ({dcc_version})\n"
-        "- Scene: {scene_path}",
+        "- Scene: {scene_path}"
     )
 
     def send(self, report):
