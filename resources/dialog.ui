@@ -16,28 +16,36 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lie_subject"/>
-     </item>
-     <item row="1" column="1">
-      <widget class="QTextEdit" name="txe_content"/>
-     </item>
      <item row="0" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="lab_subject">
        <property name="text">
-        <string>Object</string>
+        <string>Subject</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lie_subject">
+       <property name="placeholderText">
+        <string>Subject</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="lab_content">
        <property name="text">
         <string>Message</string>
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <widget class="QTextEdit" name="txe_content">
+       <property name="placeholderText">
+        <string>What's going wrong ?</string>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="lab_thumbnail">
        <property name="text">
         <string>Thumbnail</string>
        </property>
@@ -65,6 +73,12 @@
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/tk_multi_support/camera.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

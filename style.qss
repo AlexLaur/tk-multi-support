@@ -10,11 +10,22 @@ For more info about QT stylesheets, please see http://doc.qt.io/qt-4.8/styleshee
 
 ********************************************************************************************/
 
+/* --------------------------------------------------------------------- */
+/* Global styling */
+/* --------------------------------------------------------------------- */
 
-/* Example:
-
-QListView, QTableView, QScrollArea {
-    border: 2px solid {{SG_HIGHLIGHT_COLOR}};
+/* Use open sans font across the app if core supports it */
+QWidget {
+    font-family: Open Sans;
+    font-style: Regular;
 }
 
-*/
+/* Need this to kick QT into 'style mode' for labels otherwise things are not formatted correctly */
+QLabel {
+    margin-top: 1px;
+}
+
+/* thumbnail background */
+#item_thumbnail {
+    background-color: #292929;
+}
