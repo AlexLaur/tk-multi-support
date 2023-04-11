@@ -10,8 +10,6 @@
 
 import sgtk
 
-from tank_vendor.six.moves import urllib
-
 from ..models import Context, Project, User, Task, Step, Entity
 
 
@@ -104,7 +102,7 @@ class ContextFactory(object):
 
         uid = ctx_entity.get("id")
         name = ctx_entity.get("name")
-        type = ctx_entity.get("type")
-        url = cls.urljoin(base_url, "detail", type, uid)
+        entity_type = ctx_entity.get("type")
+        url = cls.urljoin(base_url, "detail", entity_type, uid)
 
-        return Entity(uid, name, url, type)
+        return Entity(uid, name, url, entity_type)
