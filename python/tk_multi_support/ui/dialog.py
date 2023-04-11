@@ -2,11 +2,10 @@
 
 # Form implementation generated
 #
-# Created: Tue Apr 11 23:38:46 2023
+# Created: Tue Apr 11 23:48:21 2023
 #      by: pyside2-uic  running on PySide2 2.0.0~alpha0
 #
 # WARNING! All changes made in this file will be lost!
-
 from tank.platform.qt import QtCore, QtGui
 
 class Ui_Dialog(object):
@@ -21,6 +20,7 @@ class Ui_Dialog(object):
         self.lab_subject.setObjectName("lab_subject")
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.lab_subject)
         self.lie_subject = QtGui.QLineEdit(Dialog)
+        self.lie_subject.setClearButtonEnabled(True)
         self.lie_subject.setObjectName("lie_subject")
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lie_subject)
         self.lab_content = QtGui.QLabel(Dialog)

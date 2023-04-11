@@ -52,6 +52,7 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
 
         # now load in the UI that was created in the UI designer
         self.setupUi(self)
+        self.pub_send.setEnabled(False)
 
         # most of the useful accessors are available through the Application class instance
         # it is often handy to keep a reference to this. You can get it via the following method:
@@ -65,6 +66,8 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
         self._report = self._data_collector.collect()
 
         # Signals
+        self.lie_subject.textChanged.connect(self.on_text_edited)
+        self.txe_content.textChanged.connect(self.on_text_edited)
         self.pub_send.clicked.connect(self.on_send_report_requested)
         self.item_thumbnail.screen_grabbed.connect(self.on_thumbnail_created)
 
@@ -86,3 +89,13 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
         temp_path = os.path.join(tempfile.gettempdir(), "test.jpg")
         pixmap.save(temp_path)
         self._report.thumbnails = [temp_path]  # TODO allows mutiple thumbs ?
+
+    @QtCore.Slot()
+    def on_text_edited(self, *args, **kwargs):
+        if not self.lie_subject.text():
+            self.pub_send.setEnabled(False)
+            return
+        if not self.txe_content.toPlainText():
+            self.pub_send.setEnabled(False)
+            return
+        self.pub_send.setEnabled(True)
