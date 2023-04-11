@@ -10,7 +10,9 @@
 
 
 class Report(object):
-    def __init__(self, scene_infos, context, subject="", content="", thumbnails=None):
+    def __init__(
+        self, scene_infos, context, subject="", content="", thumbnails=None
+    ):
 
         self.scene_infos = scene_infos
         self.context = context

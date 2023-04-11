@@ -17,4 +17,3 @@ HookClass = sgtk.get_hook_baseclass()
 class CustomInfos(HookClass):
     def collect(self, report):
         return report
-

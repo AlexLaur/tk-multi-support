@@ -17,8 +17,7 @@ HookClass = sgtk.get_hook_baseclass()
 class ReportSender(HookClass):
 
     CONTENT = (
-        "Content\n"
-        "---\n",
+        "Content\n" "---\n",
         "\n"
         "{content}\n"
         "Context\n"
@@ -32,7 +31,7 @@ class ReportSender(HookClass):
         "DCC\n"
         "---\n"
         "- {dcc_name} ({dcc_version})\n"
-        "- Scene: {scene_path}"
+        "- Scene: {scene_path}",
     )
 
     def send(self, report):
@@ -60,7 +59,7 @@ class ReportSender(HookClass):
             "title": report.subject,
             "description": description,
             "project": {"id": report.context.project.id, "type": "Project"},
-            "created_by": {"id": report.context.user.id, "type": "HumanUser"}
+            "created_by": {"id": report.context.user.id, "type": "HumanUser"},
         }
         sg_ticket = self.parent.shotgun.create("Ticket", data)
 

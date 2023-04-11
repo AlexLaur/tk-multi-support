@@ -11,7 +11,9 @@
 import sgtk
 from sgtk.platform.qt import QtCore, QtGui
 
-screen_grab = sgtk.platform.import_framework("tk-framework-qtwidgets", "screen_grab")
+screen_grab = sgtk.platform.import_framework(
+    "tk-framework-qtwidgets", "screen_grab"
+)
 
 logger = sgtk.platform.get_logger(__name__)
 
@@ -145,7 +147,13 @@ class Thumbnail(QtGui.QLabel):
                 self._no_thumb_pixmap.width(),
                 self._no_thumb_pixmap.height(),
             )
-            p.fillRect(0, 0, self.width(), self.height(), QtGui.QColor(42, 42, 42, 237))
+            p.fillRect(
+                0,
+                0,
+                self.width(),
+                self.height(),
+                QtGui.QColor(42, 42, 42, 237),
+            )
             p.setFont(QtGui.QFont("Arial", 15, QtGui.QFont.Bold))
             pen = QtGui.QPen(QtGui.QColor("#18A7E3"))
             p.setPen(pen)

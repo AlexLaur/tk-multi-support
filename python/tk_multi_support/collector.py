@@ -15,15 +15,12 @@ from .factories import ContextFactory
 
 
 class DataCollector(object):
-
     def collect(self):
         app = sgtk.platform.current_bundle()
 
         # Collect informations about the scene and the DCC
         scene_infos = app.execute_hook_method(
-            "hook_scene_infos",
-            "collect",
-            scene_infos=SceneInfos()
+            "hook_scene_infos", "collect", scene_infos=SceneInfos()
         )
 
         # Collect informations about the context
@@ -34,10 +31,7 @@ class DataCollector(object):
 
         # Collect custom informations
         report = app.execute_hook_method(
-            "hook_custom_infos",
-            "collect",
-            report=report
+            "hook_custom_infos", "collect", report=report
         )
 
         return report
-

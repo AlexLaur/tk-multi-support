@@ -8,6 +8,7 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
+
 class SceneInfos(object):
     def __init__(self, dcc_name=None, dcc_version=None, scene_path=None):
         self.dcc_name = dcc_name

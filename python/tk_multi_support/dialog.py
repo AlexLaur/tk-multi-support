@@ -33,7 +33,9 @@ def show_dialog(app_instance):
 
     # we pass the dialog class to this method and leave the actual construction
     # to be carried out by toolkit.
-    app_instance.engine.show_dialog("Report a problem...", app_instance, AppDialog)
+    app_instance.engine.show_dialog(
+        "Report a problem...", app_instance, AppDialog
+    )
 
 
 class AppDialog(QtGui.QWidget, Ui_Dialog):
@@ -73,9 +75,7 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
         self._report.content = self.txe_content.toPlainText()
 
         self._app.execute_hook_method(
-            "hook_send_report",
-            "send",
-            report=self._report
+            "hook_send_report", "send", report=self._report
         )
 
         self.close()
@@ -86,4 +86,3 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
         temp_path = os.path.join(tempfile.gettempdir(), "test.jpg")
         pixmap.save(temp_path)
         self._report.thumbnails = [temp_path]  # TODO allows mutiple thumbs ?
-

@@ -17,7 +17,6 @@ HookClass = sgtk.get_hook_baseclass()
 
 
 class SceneInfos(HookClass):
-
     def collect(self, scene_infos):
         scene_infos.current_scene = self._get_scene_path()
         scene_infos.dcc_name = self._get_dcc_name()
@@ -38,4 +37,3 @@ class SceneInfos(HookClass):
         if version == "unknown":
             return cmds.about(version=True)
         return version
-
