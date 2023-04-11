@@ -22,11 +22,11 @@ class ReportSender(HookClass):
         "{content}\n"
         "Context\n"
         "---\n"
-        "- {project}\n"
-        "- {user}\n"
-        "- {task}\n"
-        "- {step}\n"
-        "- Entity: {entity}\n"
+        "- [{project}]({project_url})\n"
+        "- [{user}]({user_url})\n"
+        "- [{task}]({task_url})\n"
+        "- [{step}]({step_url})\n"
+        "- [Entity: {entity}]({entity_url})\n"
         "\n"
         "DCC\n"
         "---\n"
@@ -50,6 +50,11 @@ class ReportSender(HookClass):
             task=report.context.task,
             step=report.context.step,
             entity=report.context.entity,
+            project_url = report.context.project.url,
+            user_url = report.context.user.url,
+            task_url = report.context.task.url,
+            step_url = report.context.step.url,
+            entity_url = report.context.entity.url,
             dcc_name=report.scene_infos.dcc_name,
             dcc_version=report.scene_infos.dcc_version,
             scene_path=report.scene_infos.current_scene,
@@ -61,6 +66,7 @@ class ReportSender(HookClass):
             "project": {"id": report.context.project.id, "type": "Project"},
             "created_by": {"id": report.context.user.id, "type": "HumanUser"},
         }
+
         sg_ticket = self.parent.shotgun.create("Ticket", data)
 
         for thumbnail in report.thumbnails:

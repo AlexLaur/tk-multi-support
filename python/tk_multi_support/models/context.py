@@ -11,13 +11,13 @@
 from collections import namedtuple
 
 
-class Project(namedtuple("Project", ["id", "name"], defaults=[0, None])):
+class Project(namedtuple("Project", ["id", "name", "url"], defaults=[0, None, None])):
     def __repr__(self):
         return "Project: {} ({})".format(self.name, self.id)
 
 
 class Entity(
-    namedtuple("Entity", ["id", "name", "type"], defaults=[0, None, None])
+    namedtuple("Entity", ["id", "name", "type", "url"], defaults=[0, None, None, None])
 ):
     def __repr__(self):
         return "{}: {} ({})".format(self.type, self.name, self.id)
@@ -26,20 +26,20 @@ class Entity(
 class User(
     namedtuple(
         "User",
-        ["id", "name", "login", "email"],
-        defaults=[0, None, None, None],
+        ["id", "name", "login", "email", "url"],
+        defaults=[0, None, None, None, None],
     )
 ):
     def __repr__(self):
         return "User: {} ({})".format(self.login, self.id)
 
 
-class Task(namedtuple("Task", ["id", "name"], defaults=[0, None])):
+class Task(namedtuple("Task", ["id", "name", "url"], defaults=[0, None, None])):
     def __repr__(self):
         return "Task: {} ({})".format(self.name, self.id)
 
 
-class Step(namedtuple("Step", ["id", "name"], defaults=[0, None])):
+class Step(namedtuple("Step", ["id", "name", "url"], defaults=[0, None, None])):
     def __repr__(self):
         return "Step: {} ({})".format(self.name, self.id)
 
