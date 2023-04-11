@@ -12,13 +12,15 @@ from collections import namedtuple
 
 
 class Project(namedtuple("Project", ["id", "name"], defaults=[0, None])):
-    pass
+    def __repr__(self):
+        return "Project: {} ({})".format(self.name, self.id)
 
 
 class Entity(
     namedtuple("Entity", ["id", "name", "type"], defaults=[0, None, None])
 ):
-    pass
+    def __repr__(self):
+        return "{}: {} ({})".format(self.type, self.name, self.id)
 
 
 class User(
@@ -28,15 +30,18 @@ class User(
         defaults=[0, None, None, None],
     )
 ):
-    pass
+    def __repr__(self):
+        return "User: {} ({})".format(self.login, self.id)
 
 
 class Task(namedtuple("Task", ["id", "name"], defaults=[0, None])):
-    pass
+    def __repr__(self):
+        return "Task: {} ({})".format(self.name, self.id)
 
 
 class Step(namedtuple("Step", ["id", "name"], defaults=[0, None])):
-    pass
+    def __repr__(self):
+        return "Step: {} ({})".format(self.name, self.id)
 
 
 class Context(

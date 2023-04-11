@@ -8,6 +8,9 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
+import os
+import tempfile
+
 import sgtk
 
 # by importing QT from sgtk rather than directly, we ensure that
@@ -79,8 +82,8 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
 
     @QtCore.Slot(object)
     def on_thumbnail_created(self, pixmap):
-        # from tempfile import gettempdir
-        # generate temp path and save the pixmap
-        # store the pixmap in the self._report.thunbnails
-        print(pixmap)
+        # TODO Move this code outside from here
+        temp_path = os.path.join(tempfile.gettempdir(), "test.jpg")
+        pixmap.save(temp_path)
+        self._report.thumbnails = [temp_path]  # TODO allows mutiple thumbs ?
 

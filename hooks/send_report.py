@@ -16,7 +16,24 @@ HookClass = sgtk.get_hook_baseclass()
 
 class ReportSender(HookClass):
 
-    CONTENT = ""
+    CONTENT = (
+        "Content\n"
+        "---\n",
+        "\n"
+        "{content}\n"
+        "Context\n"
+        "---\n"
+        "- {project}\n"
+        "- {user}\n"
+        "- {task}\n"
+        "- {step}\n"
+        "- Entity: {entity}\n"
+        "\n"
+        "DCC\n"
+        "---\n"
+        "- {dcc_name} ({dcc_version})\n"
+        "- Scene: {scene_path}"
+    )
 
     def send(self, report):
         """Send the report. It will create a new row in Ticket entity.
@@ -26,9 +43,22 @@ class ReportSender(HookClass):
         :return: True if the report has been sent, False otherwise
         :rtype: bool
         """
+
+        description = self.CONTENT.format(
+            content=report.content,
+            project=report.context.project,
+            user=report.context.user,
+            task=report.context.task,
+            step=report.context.step,
+            entity=report.context.entity,
+            dcc_name=report.scene_infos.dcc_name,
+            dcc_version=report.scene_infos.dcc_version,
+            scene_path=report.scene_infos.current_scene,
+        )
+
         data = {
             "title": report.subject,
-            "description": report.content,
+            "description": description,
             "project": {"id": report.context.project.id, "type": "Project"},
             "created_by": {"id": report.context.user.id, "type": "HumanUser"}
         }
