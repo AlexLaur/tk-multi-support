@@ -15,5 +15,8 @@ HookClass = sgtk.get_hook_baseclass()
 
 
 class CustomInfos(HookClass):
+    """Add custom informations to the report. This hook is called during the
+    generation of the report.
+    """
     def collect(self, report):
         return report

@@ -17,6 +17,11 @@ HookClass = sgtk.get_hook_baseclass()
 
 
 class SceneInfos(HookClass):
+
+    """Scene informations. It collects all informations like the current scene,
+    the DCC name and the DCC version.
+    """
+
     def collect(self, scene_infos):
         scene_infos.current_scene = self._get_scene_path()
         scene_infos.dcc_name = self._get_dcc_name()

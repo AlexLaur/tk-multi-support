@@ -16,6 +16,8 @@ HookClass = sgtk.get_hook_baseclass()
 
 class ReportSender(HookClass):
 
+    """Send the report. A new ticket will be created on ShotGrid."""
+
     CONTENT = (
         "Content\n"
         "---\n"
@@ -44,6 +46,8 @@ class ReportSender(HookClass):
         :rtype: bool
         """
 
+        self.logger.info("Sending the report on ShotGrid...")
+
         description = self.CONTENT.format(
             content=report.content,
             project=report.context.project,
@@ -69,13 +73,17 @@ class ReportSender(HookClass):
         }
 
         sg_ticket = self.parent.shotgun.create("Ticket", data)
+        self.logger.info("A ticket has been created.")
 
         for thumbnail in report.thumbnails:
+            self.logger.info("Upload a thumbnail as attachment on the ticket.")
             self.parent.shotgun.upload(
                 entity_type="Ticket",
                 entity_id=sg_ticket.get("id"),
                 path=thumbnail,
                 field_name="attachments",
             )
+
+        self.logger.info("The report has been sent on ShotGrid.")
 
         return True

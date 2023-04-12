@@ -15,7 +15,16 @@ from .factories import ContextFactory
 
 
 class DataCollector(object):
+    """DataCollector collect all informations to build the report. To do that,
+    it calls somes hooks.
+    """
+
     def collect(self):
+        """Collect all informations and build a report
+
+        :return: The generated Report
+        :rtype: tk_multi_support.models.Report
+        """
         app = sgtk.platform.current_bundle()
 
         # Collect informations about the scene and the DCC

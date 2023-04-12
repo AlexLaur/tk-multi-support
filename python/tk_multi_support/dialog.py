@@ -34,7 +34,7 @@ def show_dialog(app_instance):
     # we pass the dialog class to this method and leave the actual construction
     # to be carried out by toolkit.
     app_instance.engine.show_dialog(
-        "Report a problem...", app_instance, AppDialog
+        "Contact Studio Support", app_instance, AppDialog
     )
 
 
@@ -73,7 +73,8 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
 
     @QtCore.Slot()
     def on_send_report_requested(self):
-
+        """Called when the Report need to be send."""
+        logger.info("The report will be sent...")
         self._report.subject = self.lie_subject.text()
         self._report.content = self.txe_content.toPlainText()
 
@@ -82,16 +83,26 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
         )
 
         self.close()
+        logger.info("Closing the app.")
 
     @QtCore.Slot(object)
     def on_thumbnail_created(self, pixmap):
+        """Called when a thumbnail has been created.
+
+        :param pixmap: The thumbnail
+        :type pixmap: QPixmap
+        """
+        logger.info("A new thumbnail has been taken")
         # TODO Move this code outside from here
-        temp_path = os.path.join(tempfile.gettempdir(), "test.jpg")
+        temp_path = os.path.join(tempfile.gettempdir(), "tk-multi-support.jpg")
         pixmap.save(temp_path)
         self._report.thumbnails = [temp_path]  # TODO allows mutiple thumbs ?
 
     @QtCore.Slot()
     def on_text_edited(self, *args, **kwargs):
+        """Called when the subject or the content field is edited. It enable
+        or disable the send button.
+        """
         if not self.lie_subject.text():
             self.pub_send.setEnabled(False)
             return

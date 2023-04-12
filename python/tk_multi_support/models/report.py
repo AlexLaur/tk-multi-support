@@ -10,6 +10,13 @@
 
 
 class Report(object):
+    """The report contains all informations about the scene, the context,
+    the subject, the content and thubmnails.
+    It is used to send the ticket on ShotGrid.
+
+    It is not a true DTO because we can add other attributes on this object and
+    default attributes are not protected with properties.
+    """
     def __init__(
         self, scene_infos, context, subject="", content="", thumbnails=None
     ):

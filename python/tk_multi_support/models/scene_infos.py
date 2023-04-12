@@ -10,6 +10,7 @@
 
 
 class SceneInfos(object):
+    """This object contains all informations of the scene."""
     def __init__(self, dcc_name=None, dcc_version=None, scene_path=None):
         self.dcc_name = dcc_name
         self.dcc_version = dcc_version

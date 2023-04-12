@@ -14,9 +14,11 @@ from ..models import Context, Project, User, Task, Step, Entity
 
 
 class ContextFactory(object):
+    """Simple factory to build a context object from the sgtk context."""    
+
     @classmethod
     def build(cls, tk_ctx):
-        """Build the context object
+        """Build the context object from the sgtk context
 
         :param tk_ctx: The context from sgtk
         :type tk_ctx: sgtk.Context
@@ -40,6 +42,11 @@ class ContextFactory(object):
 
     @staticmethod
     def urljoin(*parts):
+        """Build a url from given parts. It works like os.path.join.
+
+        :return: The url
+        :rtype: str
+        """
         return "/".join(str(part).strip("/") for part in parts)
 
     @classmethod
