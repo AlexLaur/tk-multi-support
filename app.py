@@ -9,10 +9,10 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 
-from sgtk.platform import Application
+import sgtk
 
 
-class StgkStarterApp(Application):
+class MultiSupport(sgtk.platform.Application):
     """
     The app entry point. This class is responsible for initializing and tearing down
     the application, handle menu registration etc.
@@ -27,7 +27,7 @@ class StgkStarterApp(Application):
         # that resides inside the python folder in the app. This is where the actual UI
         # and business logic of the app is kept. By using the import_module command,
         # toolkit's code reload mechanism will work properly.
-        app_payload = self.import_module("app")
+        app_payload = self.import_module("tk_multi_support")
 
         # now register a *command*, which is normally a menu entry of some kind on a Shotgun
         # menu (but it depends on the engine). The engine will manage this command and
@@ -38,4 +38,10 @@ class StgkStarterApp(Application):
         menu_callback = lambda: app_payload.dialog.show_dialog(self)
 
         # now register the command with the engine
-        self.engine.register_command("Show Starter Template App...", menu_callback)
+        self.engine.register_command("Report a problem...", menu_callback)
+
+    def destroy_app(self):
+        """
+        Clean up app
+        """
+        self.log_debug("Destroying tk-multi-support")

@@ -1,4 +1,4 @@
-# Copyright (c) 2013 Shotgun Software Inc.
+# Copyright (c) 2015 Shotgun Software Inc.
 #
 # CONFIDENTIAL AND PROPRIETARY
 #
@@ -8,4 +8,16 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-from . import tk_multi_support
+import sgtk
+
+
+HookClass = sgtk.get_hook_baseclass()
+
+
+class CustomInfos(HookClass):
+    """Add custom informations to the report. This hook is called during the
+    generation of the report.
+    """
+
+    def collect(self, report):
+        return report

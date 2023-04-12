@@ -8,4 +8,7 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-from . import tk_multi_support
+
+from .report import Report  # noqa
+from .scene_infos import SceneInfos  # noqa
+from .context import Context, Project, User, Task, Step, Entity  # noqa

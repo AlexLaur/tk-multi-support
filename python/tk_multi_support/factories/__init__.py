@@ -8,4 +8,5 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-from . import tk_multi_support
+
+from .context_factory import ContextFactory  # noqa

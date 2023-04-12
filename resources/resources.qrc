@@ -1,5 +1,6 @@
 <RCC>
-  <qresource prefix="res">
+  <qresource prefix="tk_multi_support">
     <file>sg_logo.png</file>
+    <file>camera.png</file>
   </qresource>
 </RCC>

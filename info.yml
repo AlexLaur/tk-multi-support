@@ -12,6 +12,20 @@
 
 # expected fields in the configuration file for this engine
 configuration:
+  hook_scene_infos:
+    type: hook
+    default_value: "{self}/scene_infos_{engine_name}.py"
+    description: All the application specific scene operations (scene path, dcc version...).
+
+  hook_custom_infos:
+    type: hook
+    default_value: "{self}/custom_infos.py"
+    description: Add other informations to the report.
+
+  hook_send_report:
+    type: hook
+    default_value: "{self}/send_report.py"
+    description: Send the report.
 
 # this app works in all engines - it does not contain
 # any host application specific commands
@@ -21,8 +35,8 @@ supported_engines:
 requires_shotgun_fields:
 
 # More verbose description of this item
-display_name: "Shotgun Pipeline Toolkit Starter"
-description: "Template App to quickly get up and running with the Shotgun Pipeline Toolkit."
+display_name: "Shotgrid Support"
+description: "Using this app you can easily report a problem from your DCC."
 
 # Required minimum versions for this item to run
 requires_shotgun_version:
@@ -31,3 +45,4 @@ requires_engine_version:
 
 # the frameworks required to run this app
 frameworks:
+    - {"name": "tk-framework-qtwidgets", "version": "v2.x.x", "minimum_version": "v2.7.0"}
