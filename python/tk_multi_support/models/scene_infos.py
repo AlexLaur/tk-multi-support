@@ -8,10 +8,13 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
+from dataclasses import dataclass, field
 
+
+@dataclass
 class SceneInfos(object):
     """This object contains all informations of the scene."""
-    def __init__(self, dcc_name=None, dcc_version=None, scene_path=None):
-        self.dcc_name = dcc_name
-        self.dcc_version = dcc_version
-        self.scene_path = scene_path
+
+    dcc_name: str = field(default=None)
+    dcc_version: str = field(default=None)
+    scene_path: str = field(default=None)

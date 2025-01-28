@@ -8,26 +8,16 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
+from dataclasses import dataclass, field
+
 from collections import namedtuple
 
 
+@dataclass
 class BaseDataObject(object):
-    def __init__(self, uid=0, name="", url=""):
-        self._uid = uid
-        self._name = name
-        self._url = url
-
-    @property
-    def uid(self):
-        return self._uid
-
-    @property
-    def name(self):
-        return self._name
-
-    @property
-    def url(self):
-        return self._url
+    uid: int = field(default=0)
+    name: str = field(default=None)
+    url: str = field(default=None)
 
     def __repr__(self):
         return "{class_name}: {name} ({uid})".format(
@@ -35,19 +25,14 @@ class BaseDataObject(object):
         )
 
 
+@dataclass
 class Project(BaseDataObject):
     pass
 
 
+@dataclass
 class Entity(BaseDataObject):
-    def __init__(self, uid=0, name="", url="", type=None):
-        super(Entity, self).__init__(uid, name, url)
-
-        self._type = type
-
-    @property
-    def type(self):
-        return self._type
+    type: str = field(default=None)
 
     def __repr__(self):
         return "{entity_type}: {name} ({uid})".format(
@@ -55,35 +40,26 @@ class Entity(BaseDataObject):
         )
 
 
+@dataclass
 class User(BaseDataObject):
-    def __init__(self, uid=0, name="", url="", login="", email=""):
-        super(User, self).__init__(uid, name, url)
-
-        self._login = login
-        self._email = email
-
-    @property
-    def login(self):
-        return self._login
-
-    @property
-    def email(self):
-        return self._email
+    login: str = field(default=None)
+    email: str = field(default=None)
 
 
+@dataclass
 class Task(BaseDataObject):
     pass
 
 
+@dataclass
 class Step(BaseDataObject):
     pass
 
 
-class Context(
-    namedtuple(
-        "Context",
-        ["project", "entity", "user", "task", "step"],
-        defaults=[Project(), Entity(), User(), Task(), Step()],
-    )
-):
-    pass
+@dataclass
+class Context(object):
+    project: Project = field(default=Project())
+    entity: Entity = field(default=Entity())
+    user: User = field(default=User())
+    task: Task = field(default=Task())
+    step: Step = field(default=Step())

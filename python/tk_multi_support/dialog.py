@@ -66,13 +66,13 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
         self._report = self._data_collector.collect()
 
         # Signals
-        self.lie_subject.textChanged.connect(self.on_text_edited)
-        self.txe_content.textChanged.connect(self.on_text_edited)
-        self.pub_send.clicked.connect(self.on_send_report_requested)
-        self.item_thumbnail.screen_grabbed.connect(self.on_thumbnail_created)
+        self.lie_subject.textChanged.connect(self.on_textEdited)
+        self.txe_content.textChanged.connect(self.on_textEdited)
+        self.pub_send.clicked.connect(self.on_sendReportRequested)
+        self.item_thumbnail.screen_grabbed.connect(self.on_thumbnailCreated)
 
     @QtCore.Slot()
-    def on_send_report_requested(self):
+    def on_sendReportRequested(self):  # noqa
         """Called when the Report need to be send."""
         logger.info("The report will be sent...")
         self._report.subject = self.lie_subject.text()
@@ -82,11 +82,11 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
             "hook_send_report", "send", report=self._report
         )
 
-        self.close()
         logger.info("Closing the app.")
+        self.close()
 
     @QtCore.Slot(object)
-    def on_thumbnail_created(self, pixmap):
+    def on_thumbnailCreated(self, pixmap):  # noqa
         """Called when a thumbnail has been created.
 
         :param pixmap: The thumbnail
@@ -99,7 +99,7 @@ class AppDialog(QtGui.QWidget, Ui_Dialog):
         self._report.thumbnails = [temp_path]  # TODO allows mutiple thumbs ?
 
     @QtCore.Slot()
-    def on_text_edited(self, *args, **kwargs):
+    def on_textEdited(self, *args, **kwargs):  # noqa
         """Called when the subject or the content field is edited. It enable
         or disable the send button.
         """

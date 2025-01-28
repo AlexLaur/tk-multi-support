@@ -17,10 +17,10 @@ class Report(object):
     It is not a true DTO because we can add other attributes on this object and
     default attributes are not protected with properties.
     """
+
     def __init__(
         self, scene_infos, context, subject="", content="", thumbnails=None
     ):
-
         self.scene_infos = scene_infos
         self.context = context
         self.subject = subject
