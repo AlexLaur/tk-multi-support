@@ -10,8 +10,6 @@
 
 from dataclasses import dataclass, field
 
-from collections import namedtuple
-
 
 @dataclass
 class BaseDataObject(object):
