@@ -34,7 +34,7 @@ class ReportSender(HookClass):
         "DCC\n"
         "---\n"
         "- {dcc_name} ({dcc_version})\n"
-        "- Scene: {scene_path}"
+        "- Scene: {scene_path}\n"
     )
 
     def send(self, report):
@@ -50,11 +50,11 @@ class ReportSender(HookClass):
 
         description = self.CONTENT.format(
             content=report.content,
-            project=report.context.project,
-            user=report.context.user,
-            task=report.context.task,
-            step=report.context.step,
-            entity=report.context.entity,
+            project=report.context.project.name,
+            user=report.context.user.name,
+            task=report.context.task.name,
+            step=report.context.step.name,
+            entity=report.context.entity.name,
             project_url=report.context.project.url,
             user_url=report.context.user.url,
             task_url=report.context.task.url,

@@ -40,7 +40,7 @@ description: "Using this app you can easily report a problem from your DCC."
 
 # Required minimum versions for this item to run
 requires_shotgun_version:
-requires_core_version: "v0.14.28"
+requires_core_version: "v0.20.3"
 requires_engine_version:
 
 # the frameworks required to run this app

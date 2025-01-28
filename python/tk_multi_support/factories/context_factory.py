@@ -14,7 +14,7 @@ from ..models import Context, Project, User, Task, Step, Entity
 
 
 class ContextFactory(object):
-    """Simple factory to build a context object from the sgtk context."""    
+    """Simple factory to build a context object from the sgtk context."""
 
     @classmethod
     def build(cls, tk_ctx):
