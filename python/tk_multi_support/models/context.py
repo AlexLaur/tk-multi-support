@@ -56,8 +56,8 @@ class Step(BaseDataObject):
 
 @dataclass
 class Context(object):
-    project: Project = field(default=Project())
-    entity: Entity = field(default=Entity())
-    user: User = field(default=User())
-    task: Task = field(default=Task())
-    step: Step = field(default=Step())
+    project: Project = field(default_factory=Project)
+    entity: Entity = field(default_factory=Entity)
+    user: User = field(default_factory=User)
+    task: Task = field(default_factory=Task)
+    step: Step = field(default_factory=Step)

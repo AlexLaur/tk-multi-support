@@ -38,7 +38,11 @@ class MultiSupport(sgtk.platform.Application):
         menu_callback = lambda: app_payload.dialog.show_dialog(self)
 
         # now register the command with the engine
-        self.engine.register_command("Report a problem...", menu_callback)
+        self.engine.register_command(
+            "Report a problem...",
+            menu_callback,
+            {"type": "context_menu", "short_name": "report_problem"}
+        )
 
     def destroy_app(self):
         """
